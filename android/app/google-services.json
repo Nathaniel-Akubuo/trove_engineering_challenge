@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "589422251218",
+    "project_id": "trove-d8eaa",
+    "storage_bucket": "trove-d8eaa.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:589422251218:android:ed53b3b54e60a085ecf10b",
+        "android_client_info": {
+          "package_name": "com.nakubuo.trove"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "589422251218-44ktmnrmblrp79em8216l5b11o4sn5go.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.nakubuo.trove",
+            "certificate_hash": "f451c5fe8dc466584d145502dd65756074909069"
+          }
+        },
+        {
+          "client_id": "589422251218-ckcs1afoltjs5gmdefdrs71dtaji000i.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAZGR78oTS9woGMAprpinITKO8oV5xgjZQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "589422251218-ckcs1afoltjs5gmdefdrs71dtaji000i.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
