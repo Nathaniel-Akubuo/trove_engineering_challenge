@@ -77,6 +77,10 @@ const String kEmail = 'email';
 const String kPassword = 'password';
 const String kPhoneNumber = 'phoneNumber';
 const String kWalletBalance = 'walletBalance';
+const String kLoanAmount = 'loanAmount';
+const String kLoanPeriod = 'loanPeriod';
+const String kLoanSchedule= 'loanSchedule';
+const String kAmountLeft = 'amountLeft';
 
 RegExp emailRegEx = RegExp(
     r"[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?");

@@ -27,6 +27,7 @@ Future setupLocator(
 // Register dependencies
   locator.registerLazySingleton(() => NavigationService());
   locator.registerLazySingleton(() => BottomSheetService());
+  locator.registerLazySingleton(() => SnackbarService());
   locator.registerLazySingleton(() => AuthenticationService());
   locator.registerLazySingleton(() => DashboardViewModel());
   locator.registerLazySingleton(() => AccountSettingsViewModel());

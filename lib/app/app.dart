@@ -29,6 +29,7 @@ import 'package:trove/ui/sign-up/sign_up.dart';
   dependencies: [
     LazySingleton(classType: NavigationService),
     LazySingleton(classType: BottomSheetService),
+    LazySingleton(classType: SnackbarService),
     LazySingleton(classType: AuthenticationService),
     LazySingleton(classType: DashboardViewModel),
     LazySingleton(classType: AccountSettingsViewModel),

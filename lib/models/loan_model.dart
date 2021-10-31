@@ -1,6 +1,6 @@
 class LoanModel {
   double? amount;
-  int? period;
+  double? period;
 
   LoanModel({this.amount, this.period});
 }

@@ -6,7 +6,6 @@
 
 // ignore_for_file: public_member_api_docs
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 
@@ -93,8 +92,11 @@ class StackedRouter extends RouterBase {
       );
     },
     LoansView: (data) {
+      var args = data.getArgs<LoansViewArguments>(
+        orElse: () => LoansViewArguments(),
+      );
       return MaterialPageRoute<dynamic>(
-        builder: (context) => LoansView(),
+        builder: (context) => LoansView(key: args.key),
         settings: data,
       );
     },
@@ -132,6 +134,12 @@ class SignInViewArguments {
 class SignUpViewArguments {
   final Key? key;
   SignUpViewArguments({this.key});
+}
+
+/// LoansView arguments holder class
+class LoansViewArguments {
+  final Key? key;
+  LoansViewArguments({this.key});
 }
 
 /// InfoView arguments holder class
