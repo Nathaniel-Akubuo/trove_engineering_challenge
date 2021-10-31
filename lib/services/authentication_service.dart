@@ -19,7 +19,7 @@ class AuthenticationService {
     _storageService.setString(kPassword, password);
 
     _storageService.setBool(kAuthenticated, true);
-    _navigationService.navigateTo(Routes.homeView);
+    _navigationService.navigateTo(Routes.dashboardView);
   }
 
   Future<void> signInWithEmail(
@@ -27,7 +27,7 @@ class AuthenticationService {
     await Future.delayed(const Duration(seconds: 1));
     if (email == _storageService.getString(kEmail) &&
         password == _storageService.getString(kPassword)) {
-      _navigationService.navigateTo(Routes.homeView);
+      _navigationService.navigateTo(Routes.dashboardView);
     } else {
       var snackBar = SnackBar(
         content: Text(

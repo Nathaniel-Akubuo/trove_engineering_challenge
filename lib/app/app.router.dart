@@ -6,12 +6,13 @@
 
 // ignore_for_file: public_member_api_docs
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 
 import '../ui/account-settings/account_settings_view.dart';
-import '../ui/home/drawer.dart';
 import '../ui/home/dashboard_view.dart';
+import '../ui/home/drawer.dart';
 import '../ui/info-view/info_view.dart';
 import '../ui/loans/loans_view.dart';
 import '../ui/portfolio/portfolio_view.dart';
@@ -21,7 +22,7 @@ import '../ui/sign-up/sign_up.dart';
 class Routes {
   static const String signInView = '/sign-in-view';
   static const String signUpView = '/sign-up-view';
-  static const String homeView = '/home-view';
+  static const String dashboardView = '/dashboard-view';
   static const String drawerView = '/drawer-view';
   static const String portfolioView = '/portfolio-view';
   static const String loansView = '/loans-view';
@@ -30,7 +31,7 @@ class Routes {
   static const all = <String>{
     signInView,
     signUpView,
-    homeView,
+    dashboardView,
     drawerView,
     portfolioView,
     loansView,
@@ -45,7 +46,7 @@ class StackedRouter extends RouterBase {
   final _routes = <RouteDef>[
     RouteDef(Routes.signInView, page: SignInView),
     RouteDef(Routes.signUpView, page: SignUpView),
-    RouteDef(Routes.homeView, page: DashboardView),
+    RouteDef(Routes.dashboardView, page: DashboardView),
     RouteDef(Routes.drawerView, page: DrawerView),
     RouteDef(Routes.portfolioView, page: PortfolioView),
     RouteDef(Routes.loansView, page: LoansView),
@@ -93,7 +94,7 @@ class StackedRouter extends RouterBase {
     },
     LoansView: (data) {
       return MaterialPageRoute<dynamic>(
-        builder: (context) => const LoansView(),
+        builder: (context) => LoansView(),
         settings: data,
       );
     },

@@ -27,7 +27,7 @@ class DashboardView extends StatelessWidget {
                       ..scale(model.scale),
                     child: ClipRRect(
                       borderRadius: model.isDrawerOpen()
-                          ? BorderRadius.circular(15)
+                          ? kBorderRadius
                           : BorderRadius.zero,
                       child: Scaffold(
                         backgroundColor: kLightGrey,
@@ -50,7 +50,7 @@ class DashboardView extends StatelessWidget {
                                             color: Colors.grey, fontSize: 12),
                                       ),
                                       Text(
-                                        r'$1,000,000',
+                                        r'$0.00',
                                         style: kRegularTextStyle.copyWith(
                                             color: Colors.white, fontSize: 16),
                                       )
@@ -76,7 +76,7 @@ class DashboardView extends StatelessWidget {
                               ),
                             ),
                           ),
-                          backgroundColor: kBackgroundColor,
+                          backgroundColor: model.isDrawerOpen()?kLightBackgroundColor:kBackgroundColor,
                           centerTitle: true,
                           title: Text('Dashboard', style: kAppBarTextStyle),
                           elevation: 0,

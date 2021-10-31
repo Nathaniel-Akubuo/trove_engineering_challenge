@@ -38,6 +38,8 @@ dependencies:
   #util
   shared_preferences: ^2.0.6
   intl: ^0.17.0
+  date_field: ^2.1.2
+  flutter_masked_text2: ^0.9.1
 
   #firebase
   firebase_core: ^1.7.0

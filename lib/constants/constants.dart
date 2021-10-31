@@ -76,6 +76,7 @@ const String kAuthenticated = 'isAuthenticated';
 const String kEmail = 'email';
 const String kPassword = 'password';
 const String kPhoneNumber = 'phoneNumber';
+const String kWalletBalance = 'walletBalance';
 
 RegExp emailRegEx = RegExp(
     r"[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?");

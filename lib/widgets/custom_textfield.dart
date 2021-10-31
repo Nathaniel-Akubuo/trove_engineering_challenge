@@ -1,15 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:trove/constants/styles.dart';
 
 // ignore: must_be_immutable
 class CustomTextFormField extends StatefulWidget {
   final TextEditingController? controller;
+  final ValueChanged<String>? onChanged;
+  final AutovalidateMode? autovalidateMode;
+
   final Color? textColor;
   final String? hintText;
   final bool autoFocus;
   final bool isPasswordTextField;
   final TextInputType? keyboardType;
   final TextInputAction? textInputAction;
+  final List<TextInputFormatter>? inputFormatters;
   final String? labelText;
   final FormFieldValidator<String>? validator;
   bool obscureText;
@@ -17,12 +22,15 @@ class CustomTextFormField extends StatefulWidget {
   CustomTextFormField.regular(
       {Key? key,
       this.controller,
+      this.onChanged,
+      this.autovalidateMode,
       this.textColor,
       this.hintText,
       this.autoFocus = false,
       this.isPasswordTextField = false,
       this.keyboardType,
       this.textInputAction,
+      this.inputFormatters,
       this.labelText,
       this.obscureText = false,
       this.validator})
@@ -31,12 +39,15 @@ class CustomTextFormField extends StatefulWidget {
   CustomTextFormField.password(
       {Key? key,
       this.controller,
+      this.onChanged,
+      this.autovalidateMode,
       this.textColor,
       this.hintText,
       this.autoFocus = false,
       this.isPasswordTextField = true,
       this.keyboardType = TextInputType.text,
       this.textInputAction,
+      this.inputFormatters,
       this.labelText,
       this.obscureText = true,
       this.validator})
@@ -50,6 +61,9 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      autovalidateMode: widget.autovalidateMode,
+      onChanged: widget.onChanged,
+      inputFormatters: widget.inputFormatters,
       cursorColor: kGreen,
       style: kRegularTextStyle.copyWith(
           fontSize: 15,

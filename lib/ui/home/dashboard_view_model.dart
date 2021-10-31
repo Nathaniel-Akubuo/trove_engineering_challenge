@@ -5,11 +5,13 @@ import 'package:trove/app/app.router.dart';
 import 'package:trove/constants/constants.dart';
 import 'package:trove/models/portfolio_model.dart';
 import 'package:trove/services/drawer_animation_service.dart';
+import 'package:trove/services/shared_prefs.dart';
 
 class DashboardViewModel extends DrawerAnimationService {
   final _navigationService = locator<NavigationService>();
+  final _storageService = locator<SharedPreferencesService>();
   final List<PortfolioModel> _portfolioList = [];
-  double _walletBalance = 0.0;
+  double _portfolioValue = 0.0;
   final _numberFormatter = NumberFormat("#,###.###");
 
   void initializeFields() {
@@ -17,8 +19,9 @@ class DashboardViewModel extends DrawerAnimationService {
       _portfolioList.add(PortfolioModel.fromJson(json));
     }
     for (var item in _portfolioList) {
-      _walletBalance += item.equityValue!;
+      _portfolioValue += item.equityValue!;
     }
+    _storageService.setDouble(kWalletBalance, _portfolioValue);
   }
 
   String formatNumber(double number) {
@@ -37,7 +40,9 @@ class DashboardViewModel extends DrawerAnimationService {
     _navigationService.navigateTo(Routes.accountSettingsView);
   }
 
-  String get walletBalance => _numberFormatter.format(_walletBalance);
+  void signOut() => _navigationService.replaceWith(Routes.signInView);
+
+  String get walletBalance => _numberFormatter.format(_portfolioValue);
 
   List<PortfolioModel> get portfolioList => _portfolioList;
 }
