@@ -25,7 +25,10 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(scaffoldBackgroundColor: kBackgroundColor, ),
+      theme: ThemeData(
+          scaffoldBackgroundColor: kBackgroundColor,
+          primaryColor: kBackgroundColor,
+          accentColor: kGreen),
       navigatorKey: StackedService.navigatorKey,
       onGenerateRoute: StackedRouter().onGenerateRoute,
       initialRoute: Routes.dashboardView,

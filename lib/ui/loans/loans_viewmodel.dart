@@ -5,13 +5,35 @@ import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 import 'package:trove/app/app.locator.dart';
 import 'package:trove/constants/constants.dart';
+import 'package:trove/constants/styles.dart';
 import 'package:trove/models/loan_model.dart';
+import 'package:trove/services/payment_service.dart';
 import 'package:trove/services/shared_prefs.dart';
 
 class LoansViewModel extends FormViewModel {
+  bool isPaying = false;
   final _storageService = locator<SharedPreferencesService>();
   final _snackBarService = locator<SnackbarService>();
+  final _paymentService = locator<PaymentService>();
+
   final _numberFormatter = NumberFormat('#,###.##');
+
+  void initialize() {
+    _paymentService.initializePlugin();
+    _snackBarService.registerCustomSnackbarConfig(
+      variant: kTransactionSuccessful,
+      config: SnackbarConfig(
+        backgroundColor: kGreen,
+        textColor: kTextColor,
+        borderRadius: 1,
+        dismissDirection: SnackDismissDirection.HORIZONTAL,
+        barBlur: 0.6,
+        messageColor: kTextColor,
+        snackPosition: SnackPosition.BOTTOM,
+        snackStyle: SnackStyle.FLOATING,
+      ),
+    );
+  }
 
   LoanModel? _loanModel;
   String _amount = '0';
@@ -28,11 +50,32 @@ class LoansViewModel extends FormViewModel {
     await Future.delayed(const Duration(seconds: 2));
     _loanModel =
         LoanModel(amount: double.parse(amount), period: numberOfMonths);
-    _snackBarService.showSnackbar(message: 'Transaction Successful!');
+    _snackBarService.showCustomSnackBar(
+        message: kTransactionSuccessful, variant: kTransactionSuccessful);
     _storageService.setDouble(kLoanAmount, double.parse(amount));
     _storageService.setDouble(kLoanPeriod, numberOfMonths);
     _storageService.setDouble(kLoanSchedule, _monthlyPayments);
+    _storageService.setBool(kHasLoan, true);
     setBusy(false);
+  }
+
+  void payBackLoan(context) async {
+    setPayingStatus(true);
+    var paymentStatus = await _paymentService.chargeCard(
+        context: context,
+        amount: (double.parse(amountLeft.replaceAll(',', '')) * 100).toInt(),
+        email: _storageService.getString(kEmail)!);
+    if (paymentStatus == true) {
+      hasLoan = false;
+      _snackBarService.showCustomSnackBar(
+          message: kTransactionSuccessful, variant: kTransactionSuccessful);
+    }
+    setPayingStatus(false);
+  }
+
+  void setPayingStatus(bool value) {
+    isPaying = value;
+    notifyListeners();
   }
 
   void calculateSchedule() {
@@ -71,6 +114,13 @@ class LoansViewModel extends FormViewModel {
   }
 
   get monthlyPayments => _numberFormatter.format(_monthlyPayments);
+
+  bool get hasLoan => _storageService.getBool(kHasLoan);
+
+  set hasLoan(bool value) {
+    _storageService.setBool(kHasLoan, value);
+    notifyListeners();
+  }
 
   String get amount => _amount;
 

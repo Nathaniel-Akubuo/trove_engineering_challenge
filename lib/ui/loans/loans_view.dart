@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked/stacked_annotations.dart';
+import 'package:syncfusion_flutter_sliders/sliders.dart';
 import 'package:trove/constants/styles.dart';
 import 'package:trove/constants/ui_helpers.dart';
 import 'package:trove/ui/loans/widgets/loan_details_view.dart';
@@ -22,7 +23,10 @@ class LoansView extends StatelessWidget with $LoansView {
   @override
   Widget build(BuildContext context) {
     return ViewModelBuilder<LoansViewModel>.reactive(
-      onModelReady: (model) => listenToFormUpdated(model),
+      onModelReady: (model) {
+        listenToFormUpdated(model);
+        model.initialize();
+      },
       disposeViewModel: false,
       builder: (context, model, child) => Scaffold(
         appBar: AppBar(
@@ -30,7 +34,7 @@ class LoansView extends StatelessWidget with $LoansView {
             backgroundColor: kBackgroundColor,
             title: Text('Loans', style: kAppBarTextStyle),
             elevation: 0),
-        body: model.loanModel != null
+        body: model.hasLoan
             ? const LoanDetails()
             : Container(
                 padding: kMainPadding,
@@ -126,14 +130,14 @@ class LoansView extends StatelessWidget with $LoansView {
                                     overlayShape: const RoundSliderOverlayShape(
                                         overlayRadius: 0),
                                   ),
-                                  child: Slider(
+                                  child: SfSlider(
                                     value: model.numberOfMonths,
-                                    onChanged: (double value) =>
+                                    onChanged: (value) =>
                                         model.numberOfMonths = value,
-                                    divisions: 6,
+                                    interval: 1,
                                     inactiveColor: kGreen.withOpacity(0.2),
                                     activeColor: kGreen,
-                                    label: model.numberOfMonths.toString(),
+                                    showLabels: true,
                                     min: 6.0,
                                     max: 12.0,
                                   ),
@@ -164,19 +168,22 @@ class LoansView extends StatelessWidget with $LoansView {
                         color: kBackgroundColor,
                         shape: const RoundedRectangleBorder(
                             borderRadius: kBorderRadius),
-                        child: Padding(
-                          padding: const EdgeInsets.all(32),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text('Estimated Monthly Payments',
-                                  style: kAppBarTextStyle),
-                              verticalSpaceSmall,
-                              Text(
-                                r'$' + model.monthlyPayments.toString(),
-                                style: kRegularTextStyle,
-                              )
-                            ],
+                        child: SizedBox(
+                          width: double.infinity,
+                          child: Padding(
+                            padding: const EdgeInsets.all(32),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text('Estimated Monthly Payments',
+                                    style: kAppBarTextStyle),
+                                verticalSpaceSmall,
+                                Text(
+                                  r'$' + model.monthlyPayments.toString(),
+                                  style: kRegularTextStyle,
+                                )
+                              ],
+                            ),
                           ),
                         ),
                       ),

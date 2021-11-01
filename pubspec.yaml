@@ -55,8 +55,12 @@ dependencies:
   smooth_page_indicator: ^1.0.0+2
   google_fonts: ^2.1.0
   flutter_iconly: ^1.0.2
-
   font_awesome_flutter: ^9.2.0
+  syncfusion_flutter_sliders: ^19.3.47
+
+  #payment
+  flutter_paystack: ^1.0.5+1
+
 
 dev_dependencies:
   flutter_test:

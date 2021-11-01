@@ -38,7 +38,7 @@ class SharedPreferencesService {
     await _preferences!.setString(key, value);
   }
 
-  bool? getBool(String key) {
+  bool getBool(String key) {
     return _preferences?.getBool(key) ?? false;
   }
 

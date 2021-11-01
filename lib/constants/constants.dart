@@ -81,6 +81,8 @@ const String kLoanAmount = 'loanAmount';
 const String kLoanPeriod = 'loanPeriod';
 const String kLoanSchedule= 'loanSchedule';
 const String kAmountLeft = 'amountLeft';
+const String kTransactionSuccessful = 'Transaction Successful';
+const String kHasLoan = 'has loan';
 
 RegExp emailRegEx = RegExp(
     r"[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?");

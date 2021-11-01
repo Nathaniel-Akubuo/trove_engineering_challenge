@@ -4,6 +4,7 @@ import 'package:trove/constants/styles.dart';
 import 'package:trove/constants/ui_helpers.dart';
 import 'package:trove/ui/loans/loans_viewmodel.dart';
 import 'package:trove/widgets/rounded_button.dart';
+import 'package:trove/widgets/white_circular_progress_indicator.dart';
 
 import 'loan_info_widget.dart';
 
@@ -12,72 +13,33 @@ class LoanDetails extends ViewModelWidget<LoansViewModel> {
 
   @override
   Widget build(BuildContext context, LoansViewModel viewModel) {
-    final screenSize = MediaQuery.of(context).size;
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        Expanded(
-          child: Padding(
-            padding: kMainPadding,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                LoanInfoWidget(
-                    description: 'LOAN AMOUNT',
-                    value: r'$' + viewModel.loanAmount),
-                LoanInfoWidget(
-                    description: 'NUMBER OF PAYMENTS LEFT',
-                    value: viewModel.loanPeriod!.toStringAsFixed(0)),
-                LoanInfoWidget(
-                    description: 'BALANCE', value: r'$' + viewModel.amountLeft),
-              ],
-            ),
+    return Padding(
+      padding: kMainPadding,
+      child: Column(
+        children: [
+          LoanInfoWidget(
+              description: 'LOAN AMOUNT', value: r'$' + viewModel.loanAmount),
+          verticalSpaceRegular,
+          LoanInfoWidget(
+              description: 'NUMBER OF PAYMENTS LEFT',
+              value: viewModel.loanPeriod!.toStringAsFixed(0)),
+          verticalSpaceRegular,
+          LoanInfoWidget(
+              description: 'BALANCE', value: r'$' + viewModel.amountLeft),
+          verticalSpaceRegular,
+          LoanInfoWidget(
+              description: 'YOUR ESTIMATED MONTHLY PAYMENTS',
+              value: r'$' + viewModel.monthlyPayments.toString()),
+          verticalSpaceRegular,
+          const Spacer(),
+          RoundedButton(
+            onPressed: () => viewModel.payBackLoan(context),
+            child: viewModel.isPaying
+                ? const WhiteCircularProgressIndicator()
+                : Text('PAY BACK', style: kButtonTextStyle),
           ),
-        ),
-        verticalSpaceLarge,
-        Container(
-          padding: kMainPadding,
-          height: screenSize.height * 0.6,
-          child: Column(
-            children: [
-              verticalSpaceLarge,
-              Card(
-                elevation: 5,
-                color: kBackgroundColor,
-                shape:
-                    const RoundedRectangleBorder(borderRadius: kBorderRadius),
-                child: Padding(
-                  padding: const EdgeInsets.all(32),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text('Estimated Monthly Payments',
-                          style: kAppBarTextStyle),
-                      verticalSpaceSmall,
-                      Text(
-                        r'$' + viewModel.monthlyPayments.toString(),
-                        style: kRegularTextStyle,
-                      )
-                    ],
-                  ),
-                ),
-              ),
-              Expanded(
-                child: Align(
-                  child: RoundedButton(
-                      child: Text(
-                    'PAY BACK',
-                    style: kButtonTextStyle,
-                  )),
-                  alignment: Alignment.bottomCenter,
-                ),
-              ),
-            ],
-          ),
-          decoration: const BoxDecoration(
-              color: kLightGrey, borderRadius: kRoundedTopBorder),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }
