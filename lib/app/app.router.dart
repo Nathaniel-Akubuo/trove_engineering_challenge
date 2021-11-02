@@ -10,8 +10,8 @@ import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 
 import '../ui/account-settings/account_settings_view.dart';
-import '../ui/home/dashboard_view.dart';
-import '../ui/home/drawer.dart';
+import '../ui/dashboard/dashboard_view.dart';
+import '../ui/dashboard/drawer.dart';
 import '../ui/info-view/info_view.dart';
 import '../ui/loans/loans_view.dart';
 import '../ui/portfolio/portfolio_view.dart';

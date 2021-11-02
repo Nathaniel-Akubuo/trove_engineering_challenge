@@ -3,7 +3,7 @@ import 'package:stacked/stacked.dart';
 import 'package:trove/app/app.locator.dart';
 import 'package:trove/constants/styles.dart';
 import 'package:trove/constants/ui_helpers.dart';
-import 'package:trove/ui/home/widgets/custom_list_tile.dart';
+import 'package:trove/ui/dashboard/widgets/custom_list_tile.dart';
 import 'package:trove/widgets/rounded_button.dart';
 
 import 'dashboard_view_model.dart';

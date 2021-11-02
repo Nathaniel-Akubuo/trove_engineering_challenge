@@ -4,9 +4,9 @@ import 'package:stacked/stacked.dart';
 import 'package:trove/app/app.locator.dart';
 import 'package:trove/constants/styles.dart';
 import 'package:trove/constants/ui_helpers.dart';
-import 'package:trove/ui/home/drawer.dart';
 
 import 'dashboard_view_model.dart';
+import 'drawer.dart';
 
 class DashboardView extends StatelessWidget {
   const DashboardView({Key? key}) : super(key: key);
@@ -14,6 +14,7 @@ class DashboardView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ViewModelBuilder<DashboardViewModel>.reactive(
+        disposeViewModel: false,
         onModelReady: (model) => model.initializeFields(),
         builder: (context, model, child) => Stack(
               children: [
@@ -76,7 +77,9 @@ class DashboardView extends StatelessWidget {
                               ),
                             ),
                           ),
-                          backgroundColor: model.isDrawerOpen()?kLightBackgroundColor:kBackgroundColor,
+                          backgroundColor: model.isDrawerOpen()
+                              ? kLightBackgroundColor
+                              : kBackgroundColor,
                           centerTitle: true,
                           title: Text('Dashboard', style: kAppBarTextStyle),
                           elevation: 0,

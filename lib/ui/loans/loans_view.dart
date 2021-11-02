@@ -77,6 +77,30 @@ class LoansView extends StatelessWidget with $LoansView {
                             ],
                             style: kRegularTextStyle.copyWith(
                                 color: Colors.black87)),
+                      ), verticalSpaceMedium,
+                      Card(
+                        elevation: 5,
+                        color: kBackgroundColor,
+                        shape: const RoundedRectangleBorder(
+                            borderRadius: kBorderRadius),
+                        child: SizedBox(
+                          width: double.infinity,
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text('Estimated Monthly Payments',
+                                    style: kAppBarTextStyle),
+                                verticalSpaceSmall,
+                                Text(
+                                  r'$' + model.monthlyPayments.toString(),
+                                  style: kRegularTextStyle,
+                                )
+                              ],
+                            ),
+                          ),
+                        ),
                       ),
                       verticalSpaceMedium,
                       Form(
@@ -86,7 +110,8 @@ class LoansView extends StatelessWidget with $LoansView {
                           shape: const RoundedRectangleBorder(
                               borderRadius: kBorderRadius),
                           child: Padding(
-                            padding: const EdgeInsets.all(32),
+                            padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
+
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
@@ -162,31 +187,7 @@ class LoansView extends StatelessWidget with $LoansView {
                           ),
                         ),
                       ),
-                      verticalSpaceMedium,
-                      Card(
-                        elevation: 5,
-                        color: kBackgroundColor,
-                        shape: const RoundedRectangleBorder(
-                            borderRadius: kBorderRadius),
-                        child: SizedBox(
-                          width: double.infinity,
-                          child: Padding(
-                            padding: const EdgeInsets.all(32),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text('Estimated Monthly Payments',
-                                    style: kAppBarTextStyle),
-                                verticalSpaceSmall,
-                                Text(
-                                  r'$' + model.monthlyPayments.toString(),
-                                  style: kRegularTextStyle,
-                                )
-                              ],
-                            ),
-                          ),
-                        ),
-                      ),
+
                     ],
                   ),
                 ),

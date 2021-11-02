@@ -12,10 +12,11 @@ import 'package:stacked_services/stacked_services.dart';
 
 import '../services/authentication_service.dart';
 import '../services/drawer_animation_service.dart';
+import '../services/loan_service.dart';
 import '../services/payment_service.dart';
 import '../services/shared_prefs.dart';
 import '../ui/account-settings/account_settings_viewmodel.dart';
-import '../ui/home/dashboard_view_model.dart';
+import '../ui/dashboard/dashboard_view_model.dart';
 
 final locator = StackedLocator.instance;
 
@@ -34,6 +35,7 @@ Future setupLocator(
   locator.registerLazySingleton(() => AccountSettingsViewModel());
   locator.registerLazySingleton(() => DrawerAnimationService());
   locator.registerLazySingleton(() => PaymentService());
+  locator.registerLazySingleton(() => LoanService());
   final sharedPreferencesService = await SharedPreferencesService.getInstance();
   locator.registerSingleton(sharedPreferencesService);
 }

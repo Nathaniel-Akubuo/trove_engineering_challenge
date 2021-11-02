@@ -25,11 +25,11 @@ class LoanDetails extends ViewModelWidget<LoansViewModel> {
               value: viewModel.loanPeriod!.toStringAsFixed(0)),
           verticalSpaceRegular,
           LoanInfoWidget(
-              description: 'BALANCE', value: r'$' + viewModel.amountLeft),
+              description: 'BALANCE', value: r'$' + viewModel.balance),
           verticalSpaceRegular,
           LoanInfoWidget(
               description: 'YOUR ESTIMATED MONTHLY PAYMENTS',
-              value: r'$' + viewModel.monthlyPayments.toString()),
+              value: r'$' + viewModel.loanSchedule),
           verticalSpaceRegular,
           const Spacer(),
           RoundedButton(

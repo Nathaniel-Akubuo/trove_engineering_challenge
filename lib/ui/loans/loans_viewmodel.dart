@@ -6,12 +6,13 @@ import 'package:stacked_services/stacked_services.dart';
 import 'package:trove/app/app.locator.dart';
 import 'package:trove/constants/constants.dart';
 import 'package:trove/constants/styles.dart';
-import 'package:trove/models/loan_model.dart';
+import 'package:trove/services/loan_service.dart';
 import 'package:trove/services/payment_service.dart';
 import 'package:trove/services/shared_prefs.dart';
 
 class LoansViewModel extends FormViewModel {
   bool isPaying = false;
+  final _loanService = locator<LoanService>();
   final _storageService = locator<SharedPreferencesService>();
   final _snackBarService = locator<SnackbarService>();
   final _paymentService = locator<PaymentService>();
@@ -35,36 +36,23 @@ class LoansViewModel extends FormViewModel {
     );
   }
 
-  LoanModel? _loanModel;
   String _amount = '0';
   double _numberOfMonths = 6.0;
   double _monthlyPayments = 0.0;
 
-  LoanModel? get loanModel => _loanModel;
 
   @override
   void setFormStatus() {}
 
   void takeLoan() async {
     setBusy(true);
-    await Future.delayed(const Duration(seconds: 2));
-    _loanModel =
-        LoanModel(amount: double.parse(amount), period: numberOfMonths);
-    _snackBarService.showCustomSnackBar(
-        message: kTransactionSuccessful, variant: kTransactionSuccessful);
-    _storageService.setDouble(kLoanAmount, double.parse(amount));
-    _storageService.setDouble(kLoanPeriod, numberOfMonths);
-    _storageService.setDouble(kLoanSchedule, _monthlyPayments);
-    _storageService.setBool(kHasLoan, true);
+    await _loanService.takeLoan(amount, numberOfMonths, _monthlyPayments);
     setBusy(false);
   }
 
   void payBackLoan(context) async {
     setPayingStatus(true);
-    var paymentStatus = await _paymentService.chargeCard(
-        context: context,
-        amount: (double.parse(amountLeft.replaceAll(',', '')) * 100).toInt(),
-        email: _storageService.getString(kEmail)!);
+    var paymentStatus = await _loanService.payLoan(context, balance);
     if (paymentStatus == true) {
       hasLoan = false;
       _snackBarService.showCustomSnackBar(
@@ -96,7 +84,7 @@ class LoansViewModel extends FormViewModel {
   String get loanSchedule =>
       _numberFormatter.format(_storageService.getDouble(kLoanSchedule));
 
-  String get amountLeft =>
+  String get balance =>
       _numberFormatter.format(_storageService.getDouble(kLoanSchedule)! *
           _storageService.getDouble(kLoanPeriod)!);
 

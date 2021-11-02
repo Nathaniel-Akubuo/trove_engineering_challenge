@@ -14,9 +14,12 @@ class LoanInfoWidget extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Text(
-          description,
-          style: kRegularTextStyle.copyWith(color: Colors.grey),
+        Expanded(
+          child: Text(
+            description,
+            maxLines: 3,
+            style: kRegularTextStyle.copyWith(color: Colors.grey),
+          ),
         ),
         Container(
           padding: kMainPadding,
